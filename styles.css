@@ -1,0 +1,32 @@
+.switcher:nth-child(1) {
+    border-radius: 16px 0 0 16px;
+}
+.switcher:last-child {
+    border-radius: 0 16px 16px 0;
+}
+/* .title::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 2px;
+    top: 20px;
+    left: -100%;
+    background-color: #1f2937;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
+.switcher:hover > .title::before {
+    left: 0;
+} */
+.switcher:hover > .circle {
+    outline: 1px solid rgb(31 41 55);
+}
+@media (max-width: 845px) {
+    .switcher:first-child {
+        border-radius: 16px 16px 0 0;
+    }
+    .switcher:last-child {
+        border-radius: 0 0 16px 16px;
+    }
+}

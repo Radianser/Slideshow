@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Widget</title>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<link rel="stylesheet" type="text/css" href="./styles.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body>
+        <div id="app">
+            <div id="wrapper" class="w-9/12 h-96 m-auto pt-24 max-w-7xl text-gray-800">
+                <div id="switchers" class="flex justify-evenly mb-4 gap-px max-[845px]:flex-col">
+                    <div v-for="(tab, key) in tabs" class="switcher relative w-full min-[845px]:w-1/4 h-12 min-[845px]:h-24 bg-amber-500 hover:bg-amber-400 flex flex-col items-center justify-end max-[409px]:justify-center cursor-pointer select-none transition-all duration-500" @click="setActive(key)">
+                        <div class="circle absolute -top-1/2 w-24 max-[845px]:hidden bg-white rounded-full aspect-square flex items-center justify-center text-center outline outline-1 outline-amber-500 transition-all duration-500">
+                            <img :src=`/images/${key}.svg` alt="" class="w-2/5 h-2/5">
+                        </div>
+                        <p class="title relative text-center min-[845px]:font-bold min-[845px]:pb-4 pb-2 overflow-hidden">{{ tab.title }}</p>
+                    </div>
+                </div>
+                <div class="content bg-white box-border rounded-2xl outline outline-1 outline-gray-800 shadow-lg flex overflow-hidden">
+                    <div class="p-8 min-[845px]:w-1/2">
+                        <transition 
+                            mode="out-in"
+                            enter-active-class="transition duration-300 opacity-0 -translate-x-2"
+                            leave-active-class="transition duration-300 opacity-0 -translate-x-2"
+                            enter-to-class="opacity-100 translate-x-0"
+                            leave-to-class="opacity-0"
+                        >
+                            <div class="h-full flex flex-col justify-between" :key="currentTabComponent.title">
+                                <div class="description">
+                                    <h2 class="text-xl font-bold">{{ currentTabComponent.title }}</h2>
+                                    <ul class="list-disc list-inside my-4">
+                                        <li>Низкая стоимость</li>
+                                        <li>Стабильное подключение</li>
+                                        <li>Быстрота соединения</li>
+                                    </ul>
+                                    <p class="w-full">{{ currentTabComponent.text }}</p>
+                                </div>
+                                <div>
+                                    <button class="py-2 px-4 bg-amber-500 hover:bg-amber-400 rounded-full mt-4 text-white font-semibold hover:ring-1 ring-amber-400 ring-offset-4 transition-all duration-500">Отправить запрос</button>
+                                </div>
+                            </div>
+                        </transition>
+                    </div>
+                    <div class="img w-1/2 max-[845px]:hidden">
+                        <transition 
+                            mode="out-in"
+                            enter-active-class="transition duration-300 opacity-0 translate-x-2"
+                            leave-active-class="transition duration-300 opacity-0 translate-x-2"
+                            enter-to-class="opacity-100 translate-x-0"
+                            leave-to-class="opacity-0"
+                        >
+                            <div class="w-full h-full bg-center bg-no-repeat bg-cover overflow-hidden" :class="'bg-[url(/images/'+ currentTabComponent.img +'.jpg)]'" :key="currentTabComponent.title"></div>
+                        </transition>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<script type="module" src="./js/script.js"></script>
+	</body>
+</html>
